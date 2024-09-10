@@ -51,9 +51,9 @@ const headingReadout = document.getElementById('headingReadout');
 function updateHeading(event) {
     
     // Update the heading display
-    document.getElementById('alphaReadout').textContent = `z-axis rotation: ${Math.round(alpha)}°`;
-    document.getElementById('betaReadout').textContent = `x-axis rotation: ${Math.round(beta)}°`;
-    document.getElementById('gammaReadout').textContent = `y-axis rotation: ${Math.round(gamma)}°`;
+    document.getElementById('alphaReadout').textContent = `z-axis rotation: ${Math.round(event.alpha)}°`;
+    document.getElementById('betaReadout').textContent = `x-axis rotation: ${Math.round(event.beta)}°`;
+    document.getElementById('gammaReadout').textContent = `y-axis rotation: ${Math.round(event.gamma)}°`;
 }
 
 // Check if the browser supports device orientation events
