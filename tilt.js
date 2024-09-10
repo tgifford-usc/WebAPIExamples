@@ -1,10 +1,4 @@
 const headingReadout = document.getElementById('headingReadout');
-
-window.addEventListener("deviceorientation", event => {
-    
-    
-    // process event.alpha, event.beta and event.gamma
-});
   
 // Function to handle device orientation
 function updateHeading(event) {
