@@ -1,5 +1,8 @@
 const headingReadout = document.getElementById('headingReadout');
-  
+
+// ask for permission to access device orientation, on devices that support this (ios)
+if (DeviceMotionEvent.requestPermission) { DeviceMotionEvent.requestPermission(); }
+
 // Function to handle device orientation
 function updateHeading(event) {
     // Get the alpha value, which is the compass heading
