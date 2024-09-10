@@ -18,14 +18,22 @@
     <!-- Device Tilt Example-->
     <div id="tiltExamplePanel">
         <div class="compass-container">
-            <div id="headingReadout">Compass Heading: 0°</div>
-            <div id="sideTiltReadout">Sideways Tilt: 0°</div>
-            <div id="forwardTiltReadout">Forward Tilt: 0°</div>
+            <div id="alphaReadout">z-axis rotation: 0°</div>
+            <div id="betaReadout">x-axis rotation: 0°</div>
+            <div id="gammaReadout">y-axis rotation: 0°</div>
         </div>    
     </div>
     
     <!-- Accessing the Camera example -->
     <div id="cameraExamplePanel">
+        <div class="camera">
+            <video id="video">Video stream not available.</video>
+            <button id="startbutton">Take photo</button>
+            <canvas id="canvas"> </canvas>
+            <div class="output">
+                <img id="photo" alt="The screen capture will appear in this box." />
+            </div>
+          </div>
     </div>
     <script src="index.js"></script>
 </body>

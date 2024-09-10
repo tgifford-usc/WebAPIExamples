@@ -39,7 +39,7 @@ homeButton.addEventListener('click', (event) => {
 });
 
 
-// Code for tilt detection
+//-----  Code for tilt detection -----//
 function setupTiltExample() {
     // ask for permission to access device orientation, on devices that support this (ios)
     if (DeviceMotionEvent.requestPermission) { DeviceMotionEvent.requestPermission(); }
@@ -49,18 +49,11 @@ const headingReadout = document.getElementById('headingReadout');
 
 // Function to handle device orientation
 function updateHeading(event) {
-    // Get the alpha value, which is the compass heading
-    let heading = event.alpha;
-    let sideTilt = event.beta;
-    let forwardTilt = event.gamma;
-
-    // Correct the heading to be between 0 and 360 degrees
-    if (heading < 0) { heading += 360; }
-
+    
     // Update the heading display
-    document.getElementById('headingReadout').textContent = `Heading: ${Math.round(heading)}°`;
-    document.getElementById('sideTiltReadout').textContent = `Sideways Tilt: ${Math.round(sideTilt)}°`;
-    document.getElementById('forwardTiltReadout').textContent = `Forward Tilt: ${Math.round(forwardTilt)}°`;
+    document.getElementById('alphaReadout').textContent = `z-axis rotation: ${Math.round(alpha)}°`;
+    document.getElementById('betaReadout').textContent = `x-axis rotation: ${Math.round(beta)}°`;
+    document.getElementById('gammaReadout').textContent = `y-axis rotation: ${Math.round(gamma)}°`;
 }
 
 // Check if the browser supports device orientation events
@@ -70,3 +63,24 @@ if (window.DeviceOrientationEvent) {
     alert('Device orientation not supported.');
 }
 
+
+
+//-----  Code for accessing the camera -----//
+const width = 320;    // We will scale the photo width to this
+const height = 0;     // This will be computed based on the input stream
+const streaming = false;
+let video = null;
+let canvas = null;
+let photo = null;
+let startbutton = null;
+
+async function setupCameraExample() {
+    video = document.getElementById('video');
+    canvas = document.getElementById('canvas');
+    photo = document.getElementById('photo');
+    startbutton = document.getElementById('startbutton');
+
+    let stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+    video.srcObject = stream;
+    video.play();
+}
