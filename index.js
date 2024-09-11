@@ -66,11 +66,13 @@ if (window.DeviceOrientationEvent) {
 
 
 //-----  Code for accessing the camera -----//
-const width = 320;    // We will scale the photo width to this
+let width = 320;    // We will scale the photo width to this
 let height = 0;     // This will be computed based on the input stream
-const streaming = false;
+let streaming = false;
+let videoAspectRatio = 1.6;
 let video = document.getElementById('video');
 let canvas = document.getElementById('canvas');
+let output = document.getElementById('photoFrame');
 let photo = document.getElementById('photo');
 let startbutton = document.getElementById('startbutton');
 
@@ -98,8 +100,8 @@ function takepicture() {
     }
 }
 
-async function setupCameraExample() {
 
+async function setupCameraExample() {
     let stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
     video.srcObject = stream;
     video.play();
@@ -107,19 +109,47 @@ async function setupCameraExample() {
         "canplay",
         (ev) => {
             if (!streaming) {
-            height = (video.videoHeight / video.videoWidth) * width;
-    
-            video.setAttribute("width", width);
-            video.setAttribute("height", height);
-            canvas.setAttribute("width", width);
-            canvas.setAttribute("height", height);
-            streaming = true;
+                width = video.videoWidth;
+                height = video.videoHeight;
+                videoAspectRatio = video.videoWidth / video.videoHeight;
+                resizeCameraExample();
+                streaming = true;
             }
         },
         false,
     );
     
     clearphoto();
+    window.addEventListener('resize', resizeCameraExample);
+
+}
+
+
+function resizeCameraExample() {
+    // Find the usable width and height
+    let w = document.documentElement.clientWidth;
+    let h = document.documentElement.clientHeight;
+
+    let portraitMode = (h > w);
+
+    if (portraitMode) {
+        video.setAttribute("width", w);
+        video.setAttribute("height", w / videoAspectRatio);
+        canvas.setAttribute("width", w);
+        canvas.setAttribute("height", w / videoAspectRatio);
+
+        photo.setAttribute('style', `width: ${w}px; height: ${w / videoAspectRatio}px;`);
+
+    } else {
+
+        video.setAttribute("height", 0.45 * h);
+        video.setAttribute("width", 0.45 * h * videoAspectRatio);
+        canvas.setAttribute("height", 0.45 * h);
+        canvas.setAttribute("width", 0.45 * h * videoAspectRatio);
+
+        photo.setAttribute('style', `width: ${0.45 * h * videoAspectRatio}px; height: ${0.45 * h}px;`);
+
+    }
 }
 
   
