@@ -45,12 +45,9 @@ function setupTiltExample() {
     if (DeviceMotionEvent.requestPermission) { DeviceMotionEvent.requestPermission(); }
 }
 
-const headingReadout = document.getElementById('headingReadout');
-
 // Function to handle device orientation
-function updateHeading(event) {
-    
-    // Update the heading display
+function updateOrientation(event) {    
+    // Update the orientation display
     document.getElementById('alphaReadout').textContent = `z-axis rotation: ${Math.round(event.alpha)}°`;
     document.getElementById('betaReadout').textContent = `x-axis rotation: ${Math.round(event.beta)}°`;
     document.getElementById('gammaReadout').textContent = `y-axis rotation: ${Math.round(event.gamma)}°`;
@@ -58,7 +55,7 @@ function updateHeading(event) {
 
 // Check if the browser supports device orientation events
 if (window.DeviceOrientationEvent) {
-    window.addEventListener('deviceorientation', updateHeading, true);
+    window.addEventListener('deviceorientation', updateOrientation, true);
 } else {
     alert('Device orientation not supported.');
 }
