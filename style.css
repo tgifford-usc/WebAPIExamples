@@ -32,6 +32,7 @@ body {
 .example-button {
     height: 75%;
     width: 75%;
+    font-size: 3rem;
 }
 
 #tiltExamplePanel {
