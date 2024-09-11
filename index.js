@@ -42,7 +42,7 @@ homeButton.addEventListener('click', (event) => {
 //-----  Code for tilt detection -----//
 function setupTiltExample() {
     // ask for permission to access device orientation, on devices that support this (ios)
-    if (DeviceMotionEvent.requestPermission) { DeviceMotionEvent.requestPermission(); }
+    if (DeviceOrientationEvent.requestPermission) { DeviceOrientationEvent.requestPermission(); }
 }
 
 // Function to handle device orientation
