@@ -130,24 +130,24 @@ function resizeCameraExample() {
     let w = document.documentElement.clientWidth;
     let h = document.documentElement.clientHeight;
 
-    let portraitMode = (h > w);
+   
 
-    if (portraitMode) {
-        video.setAttribute("width", w);
-        video.setAttribute("height", w / videoAspectRatio);
-        canvas.setAttribute("width", w);
-        canvas.setAttribute("height", w / videoAspectRatio);
+    let fitsHorizontally = (0.48 * h * videoAspectRatio < w);
 
-        photo.setAttribute('style', `width: ${w}px; height: ${w / videoAspectRatio}px;`);
-
+    if (fitsHorizontally) {
+        video.setAttribute("height", 0.48 * h);
+        video.setAttribute("width", 0.48 * h * videoAspectRatio);
+        canvas.setAttribute("height", 0.48 * h);
+        canvas.setAttribute("width", 0.48 * h * videoAspectRatio);
+    
+        photo.setAttribute('style', `width: ${0.48 * h * videoAspectRatio}px; height: ${0.48 * h}px;`);
     } else {
-
-        video.setAttribute("height", 0.45 * h);
-        video.setAttribute("width", 0.45 * h * videoAspectRatio);
-        canvas.setAttribute("height", 0.45 * h);
-        canvas.setAttribute("width", 0.45 * h * videoAspectRatio);
-
-        photo.setAttribute('style', `width: ${0.45 * h * videoAspectRatio}px; height: ${0.45 * h}px;`);
+    
+        video.setAttribute("width", 0.95 * w);
+        video.setAttribute("height", 0.95 * w / videoAspectRatio);
+        canvas.setAttribute("width", 0.95 * w);
+        canvas.setAttribute("height", 0.95 * w / videoAspectRatio);
+        photo.setAttribute('style', `width: ${0.95 * w}px; height: ${0.95 * w / videoAspectRatio}px;`);
 
     }
 }
